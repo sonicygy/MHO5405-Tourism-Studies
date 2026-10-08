@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123b37"><title>Attraction Manager Lab · MHO5405</title><link rel="stylesheet" href="style.css"><script src="engine.js" defer></script><script src="ui.js" defer></script><script src="app.js" defer></script></head>
+<body>
+<header class="topbar"><a class="brand" href="./"><span class="brandmark">A</span><span>ATTRACTION LAB<small>MHO5405 · TOURISM STUDIES</small></span></a><div class="header-actions"><a href="classroom.html" data-i18n="classroom">課堂投影</a><div class="languages" aria-label="Language"><button data-lang="zh" aria-pressed="false">繁中</button><button data-lang="bi" aria-pressed="true">中 / EN</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
+<div id="storage-warning" class="notice" hidden></div>
+<section id="welcome" class="welcome wrap">
+ <div class="eyebrow">LECTURE 06 · DESIGN & FEASIBILITY</div><h1 data-i18n="title">把一個好點子，變成可行的樂園。</h1><p class="lede" data-i18n="intro">你是海濱文化樂園的營運經理。讓遊客享受體驗，也讓隊列、成本和社區影響保持可控。</p>
+ <div class="intro-grid"><form id="start-form" class="card join"><label for="group-name" data-i18n="groupLabel">小組名稱</label><input id="group-name" maxlength="80" required autocomplete="off" placeholder="Group 01"><p data-i18n="groupHint">每組一部手機。三輪，每輪模擬兩小時，約15分鐘完成。</p><button class="primary" type="submit" data-i18n="enter">進入樂園</button><div class="privacy" data-i18n="privacy">紀錄保存在本設備。完成後可下載或分享給老師；不會自動傳送至教師后台。</div></form>
+ <div class="intro-art card"><div class="mini-park"><span class="park-tree a">♣</span><span class="park-tree b">♣</span><span class="park-tree c">♣</span><div class="mini-roof"></div><div class="mini-building"><span>CRAFT HOUSE</span></div><div class="mini-path"></div><span class="mini-person p1"></span><span class="mini-person p2"></span><span class="mini-person p3"></span></div><div class="art-caption"><span class="tag" data-i18n="fictional">虛構教學場景</span><p data-i18n="challenge">好看，還要好運作。</p></div></div></div>
+ <div class="three-cards"><article><b>01</b><h3 data-i18n="r1">正常客流</h3><p data-i18n="r1desc">先預測，再測試你的營運方案。</p></article><article><b>02</b><h3 data-i18n="r2">高峰挑戰</h3><p data-i18n="r2desc">更多遊客來了。哪個資源先到極限？</p></article><article><b>03</b><h3 data-i18n="r3">突發事件</h3><p data-i18n="r3desc">因應天氣、社區或無障礙需求。</p></article></div>
+</section>
+<main id="game" class="wrap" hidden>
+ <div class="game-heading"><div><div class="eyebrow" id="group-display"></div><h1 id="round-title"></h1></div><button class="subtle" id="new-group" data-i18n="newGroup">換組 / 重新開始</button></div>
+ <div class="round-track" id="round-track" aria-label="Rounds"></div>
+ <section class="scenario-card"><div><span class="tag" id="scenario-tag"></span><h2 id="scenario-title"></h2><p id="scenario-description"></p></div><div class="scenario-stats"><b id="demand"></b><span data-i18n="perHour">有意到訪 / 小時</span><small data-i18n="independent">每輪重新開始，不延續前輪隊列。</small></div></section>
+ <div class="workspace"><section class="visual-panel card">
+ <div class="panel-top"><div><span class="eyebrow" data-i18n="liveMap">PARK LIVE · 即時樂園</span><h2 data-i18n="parkName">海濱文化樂園</h2></div><div class="clock"><b id="clock">00:00</b><small>/ 02:00</small></div></div>
+ <svg id="park-map" viewBox="0 0 700 440" role="img" aria-label="Fictional park with entrance, queue, craft house and garden">
+  <defs><pattern id="water" width="25" height="20" patternUnits="userSpaceOnUse"><path d="M0 10 Q6 5 12 10 T25 10" fill="none" stroke="#a3d4d0" stroke-width="2"/></pattern></defs>
+  <rect width="700" height="440" rx="24" fill="#e9efe0"/><path d="M0 330 Q180 285 360 330 T700 315 V440 H0Z" fill="#c4e2df"/><path d="M0 330 Q180 285 360 330 T700 315 V440 H0Z" fill="url(#water)"/>
+  <path d="M40 245 H650 M190 245 V115 H515 V245" fill="none" stroke="#fcf6e7" stroke-width="40" stroke-linecap="round"/>
+  <path d="M45 285 H655" fill="none" stroke="#e4cdb0" stroke-width="8" stroke-dasharray="8 8"/>
+  <g fill="#7eac83"><circle cx="70" cy="80" r="27"/><circle cx="104" cy="60" r="20"/><circle cx="620" cy="70" r="30"/><circle cx="660" cy="102" r="21"/><circle cx="68" cy="155" r="22"/><circle cx="375" cy="50" r="18"/></g>
+  <g id="offpath-area" fill="#e6dbc6" stroke="#b89c74" stroke-dasharray="4 5" hidden><rect x="190" y="159" width="220" height="57" rx="12"/></g>
+  <g id="craft-building"><rect x="235" y="80" width="125" height="80" rx="10" fill="#eab486"/><path d="M222 82 L297 30 L372 82Z" fill="#bd7154"/><rect x="275" y="108" width="40" height="52" rx="7" fill="#6c6556"/><rect x="247" y="97" width="20" height="22" rx="3" fill="#f9edd2"/><rect x="324" y="97" width="20" height="22" rx="3" fill="#f9edd2"/></g>
+  <g><rect x="455" y="75" width="130" height="75" rx="25" fill="#9cbd8c"/><circle cx="488" cy="103" r="12" fill="#e9d781"/><circle cx="542" cy="123" r="12" fill="#e8bda2"/><circle cx="535" cy="92" r="10" fill="#fff4d1"/></g>
+  <g fill="#e1d5c7"><rect x="520" y="355" width="48" height="45" rx="5"/><rect x="580" y="348" width="52" height="52" rx="5"/></g>
+  <g fill="#977e66"><path d="M514 355 L544 330 L574 355Z"/><path d="M574 348 L606 323 L638 348Z"/></g>
+  <g id="visitor-dots"></g>
+  <g class="map-label"><text x="297" y="181" text-anchor="middle" id="label-craft"></text><text x="520" y="174" text-anchor="middle" id="label-garden"></text><text x="69" y="285" text-anchor="middle" id="label-entry"></text><text x="588" y="425" text-anchor="middle" id="label-neighbours"></text><text x="250" y="313" id="label-path"></text></g>
+  <g id="rain-overlay" hidden fill="none" stroke="#729bb1" stroke-width="3" opacity=".55"><path d="M100 25l-8 19 M180 35l-8 19 M410 20l-8 19 M590 220l-8 19 M390 190l-8 19 M70 200l-8 19 M650 160l-8 19"/></g>
+ </svg>
+ <div class="map-key"><span><i class="dot queue-dot"></i><span data-i18n="queueLegend">排隊</span></span><span><i class="dot active-dot"></i><span data-i18n="activeLegend">主體驗</span></span><span><i class="dot garden-dot"></i><span data-i18n="gardenLegend">花園體驗</span></span><small data-i18n="dotsNote">每點代表1人，排隊最多顯示40點。</small></div>
+ <div class="transport"><button id="run" class="primary" data-i18n="run">運行兩小時</button><button id="pause" class="subtle" disabled data-i18n="pause">暫停</button><button id="instant" class="subtle" data-i18n="instant">直接看結果</button><label><span data-i18n="speed">速度</span><select id="speed"><option value="100">1×</option><option value="30" selected>3×</option><option value="8">10×</option></select></label></div>
+ <div class="notice" id="event-status" role="status"></div>
+ <div class="chart-header"><h3 data-i18n="queueChart">隊列變化</h3><span id="queue-caption"></span></div><svg id="queue-chart" viewBox="0 0 620 160" role="img" aria-label="Queue size against simulated minutes"></svg>
+ <div class="metrics" id="metrics" aria-live="off"></div>
+ </section>
+ <section class="decision-panel card"><div class="panel-top"><div><span class="eyebrow" data-i18n="yourPlan">YOUR PLAN · 你的方案</span><h2 data-i18n="planHeading">調整營運</h2></div><button class="subtle" id="baseline" data-i18n="baseline">課件基準</button></div>
+ <form id="plan-form"><fieldset id="plan-fields"><legend class="sr-only">Operating choices</legend>
+ <div class="control-grid"><label><span data-i18n="guides">導賞員</span><select id="guides"><option>1</option><option>2</option><option>3</option></select></label><label><span data-i18n="batch">每組人数</span><select id="groupSize"><option>8</option><option selected>12</option><option>16</option></select></label><label><span data-i18n="interval">出發窗口間隔（分鐘）</span><select id="interval"><option>10</option><option>15</option><option selected>20</option><option>30</option></select></label><label><span data-i18n="booking">预约上限（人 / 小時）</span><select id="booking"><option value="0" data-i18n="noBooking">不用预约</option><option>24</option><option>36</option><option>48</option><option>60</option><option>72</option><option>96</option></select></label><label class="wide"><span data-i18n="redirect">引導至替代花園體驗</span><select id="redirect"><option value="0">0%</option><option value="25">25%</option><option value="50">50%</option></select></label></div>
+ <label class="checkbox"><input id="offpath" type="checkbox"><span data-i18n="offpath">設獨立等候區，移離居民通道</span></label><label class="checkbox"><input id="accessible" type="checkbox"><span data-i18n="accessible">提供無障礙路線與協助</span></label>
+ <div class="calculation" id="calculation"></div><p class="micro" data-i18n="resources">每場體驗20分鐘；導賞員忙碌或場內已滿，出發窗口會被跳過。縮短窗口間隔不一定增加容量。</p>
+ <label class="reflection"><span data-i18n="prediction">預測：哪個資源先到極限？</span><textarea id="prediction" maxlength="800" rows="2" required></textarea></label></fieldset>
+ <button type="button" id="retry" class="subtle full" hidden data-i18n="retry">修改方案，再測一次</button>
+ <div id="reflection-area" hidden><h3 data-i18n="explain">為決策提供理由</h3><label class="reflection"><span data-i18n="reason">你的選擇有何好處？誰承擔代價？</span><textarea id="reason" maxlength="800" rows="3" required></textarea></label><label class="reflection"><span data-i18n="review">哪項指標會觸發行動？誰處理？還要驗證甚麼？</span><textarea id="review" maxlength="800" rows="3" required></textarea></label><button type="button" id="save-round" class="primary full"></button></div>
+ </form><div id="feedback" class="feedback" aria-live="polite"></div>
+ </section></div>
+ <details class="assumptions card"><summary data-i18n="assumptions">計算方式、假設與參考</summary><div id="model-notes"></div><p><a href="SOURCES.md" data-i18n="sources">參考來源與設計記錄</a></p></details>
+</main>
+<section id="summary" class="wrap" hidden><div class="eyebrow">YOUR MANAGEMENT BRIEF</div><h1 data-i18n="finished">三輪完成。帶著證據討論。</h1><p id="summary-group"></p><div id="report-cards"></div><div class="summary-actions"><button id="download-json" class="primary" data-i18n="downloadJSON">下載小組紀錄（JSON）</button><button id="download-csv" class="subtle" data-i18n="downloadCSV">下載比較表（CSV）</button><button id="share" class="subtle" data-i18n="share">複製方案連結給老師</button><button id="print" class="subtle" data-i18n="print">列印 / 存為 PDF</button><button id="restart" class="subtle" data-i18n="restart">另一組 / 再玩一次</button></div><p class="notice" id="share-status" role="status"></p><div class="card"><h2 data-i18n="canvasBridge">帶入你的小組景點畫布</h2><p data-i18n="canvasText">以本次觀察支持營運和影響控制欄位。把客流、成本、容量與居民接受程度列為假設，指出需要甚麼現場觀察或訪談來驗證。</p></div></section>
+<footer class="wrap"><span>THEi · MHO5405 · LECTURE 06</span><p data-i18n="footer">虛構場景與教學參數；結果供課堂比較，實際營運需現場證據。</p><a href="SOURCES.md" data-i18n="credits">模型與參考來源</a></footer>
+</body></html>
